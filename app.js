@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const vaultRoutes = require("./routes/vault");
 
 const app = express();
 
@@ -31,3 +32,4 @@ dbConnection();
 // routes
 app.get("/", (req, res) => res.render("home"));
 app.get("/smoothies", (req, res) => res.render("smoothies"));
+app.use(vaultRoutes);
