@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const vaultRoutes = require("./routes/vault");
 const cookieParser = require("cookie-parser");
+const { authentic, checkUser } = require("./middleware/authMiddleware");
 
 const app = express();
 
@@ -33,6 +34,7 @@ const dbConnection = async () => {
 };
 dbConnection();
 // routes
+app.get("*", checkUser);
 app.get("/", (req, res) => res.render("home"));
-app.get("/smoothies", (req, res) => res.render("smoothies"));
+app.get("/meals", authentic, (req, res) => res.render("meals"));
 app.use(vaultRoutes);
