@@ -20,7 +20,7 @@ const authentic = (req, res, next) => {
 };
 
 const checkUser = (req, res, next) => {
-  const token = res.cookies.jwt;
+  const token = req.cookies.jwt;
   if (token) {
     jwt.verify(token, "this is my secret string", async (err, decoded) => {
       if (err) {
